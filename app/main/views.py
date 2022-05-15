@@ -33,4 +33,18 @@ def update_profile(uname):
         return redirect(url_for('main.update_profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
+
+@main.route('/post',methods=['GET','POST'])
+@login_required
+def write_blog():
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog = Blog(blog= form.blog.data,author = current_user.id)
+    
+        db.session.add(blog)
+        db.session.commit()
+        return redirect(url_for('auth.profile',uname=current_user.username))
+
+
+    return render_template('blogs.html',form = form)
   
