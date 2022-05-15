@@ -8,6 +8,6 @@ from  app.request import get_quotes
 def index():
     title = "Welcome to Blogging Application"
 
-    quotes_results = get_quotes()
+    quoteFound = get_quotes()
   
-    return render_template('index.html',title=title,quotes = quotes_results)
+    return render_template('index.html',title=title,quotes = quoteFound)

@@ -2,15 +2,14 @@
   <div class="container">
     <div class="row">
       {% for quote in quotes %}
-        <div class="col-sm-6 col-md-6">
-          <h3> {{quote.id}}. {{ quote.quote }}</h3>
-        <div>
-          <p> written by <i>{{quote.author}} </i></p> 
         </div>
-        </div>
-      
+          <div class="jumbotron" style="background-color: grey;color: bisque;">
+          <h1 class="display-4 text-center">Hello, todays quote is!</h1>
+          <p class="lead text-center"> {{quote.id}}. {{ quote.quote }}</p>
+          <hr class="my-4">
+          <p class="text-center"style="color:green"> written by <i>{{quote.author}} </i></p> 
+          <h4 class="text-center">Welcome to Blogs APP</h4>
+        </div>      
       {% endfor %}
     </div>
-  </div>
-
 {% endmacro %}

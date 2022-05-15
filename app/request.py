@@ -13,24 +13,23 @@ def get_quotes():
   with urllib.request.urlopen(get_quotes_url)as url:
     get_quotes_data = url.read()
     get_quotes_reponse = json.loads(get_quotes_data) 
-    quotes_results = None
+    quote_object = None
 
-    if get_quotes_reponse['results']:
-      quotes_results_list = get_quotes_reponse['results']
-      quotes_results  = process_results(quotes_results_list)
+    if get_quotes_reponse:
+      quotes_results = get_quotes_reponse
+      quote_object = process_results(quotes_results)
+    return quote_object
 
-  return quotes_results
 
-
-def process_results(quote_list):
-  quotes_results = []
-  for quote_item in quote_list:
-    id =  quote_item.get('id')
-    quote = quote_item.get('quote')
-    author = quote_item.get('author')
+def process_results(quotes):
+  quoteFound= []
+  if quotes:
+    id =  quotes.get('id')
+    quote = quotes.get('quote')
+    author = quotes.get('author')
    
-    if id:
-      quote_object = Quote(id,quote,author)
-      quotes_results.append(quote_object)
 
-  return quotes_results 
+    quote_object = Quote(id,quote,author)
+    quoteFound.append(quote_object)
+
+  return quoteFound

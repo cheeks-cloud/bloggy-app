@@ -1,5 +1,8 @@
 from flask import Flask
 from config import config_options
+from flask_bootstrap import Bootstrap
+
+bootstrap =Bootstrap()
 
 def create_app(config_name):
 
@@ -14,5 +17,8 @@ def create_app(config_name):
    #setting config
    from .request import configure_request
    configure_request(app)
+
+   #initializing extensions
+   bootstrap.init_app(app)
 
    return app

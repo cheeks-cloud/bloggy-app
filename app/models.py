@@ -1,6 +1,6 @@
-from . import db
+# from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
-from . import login_manager
+# from . import login_manager
 
 
 class Quote:
