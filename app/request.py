@@ -4,12 +4,11 @@ api_key = None
 base_url = None
 
 def configure_request(app):
-  global api_key,base_url
-  api_key = app.config['']
-  base_url = app.config['']
+  global base_url
+  base_url = app.config['QUOTE_BASE_URL']
 
 def get_quotes():
-  get_quotes_url = base_url .format(x,api_key)
+  get_quotes_url = base_url
 
   with urllib.request.urlopen(get_quotes_url)as url:
     get_quotes_data = url.read()
