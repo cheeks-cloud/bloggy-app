@@ -13,3 +13,47 @@
       {% endfor %}
     </div>
 {% endmacro %}
+{% macro displayBlogs(blogs) %}
+<div>
+<div class="container">
+  <div class="row" >
+    {% if blogs %}
+    <div class="card" style="width: 18rem;background-color: rgb(0,0,0,0);border: 2px solid white;padding: 20px;">
+      {% for blog in blogs %}
+      <h4 class="text-white"> {{blog.blog}}  </h4>
+      <div class="card-body">
+        <p class="card-text text-white"> Written by: <i> {{blog.get_author(blog.author)}}  </i></p>
+        <a href=" {{url_for('main.newComment',comment_id=post.id)}} ">Click to add a comment</a>
+       
+        {% if blog.get_comments(blog.id) %}
+        <h2 class="text-white"> Here are all comments </h2>
+        <div class="container comments"style="display:flex">
+          {% for comment in blog.get_comments(blog.id) %}
+          <p class="text-white">
+            {{comment.get_author(comment.author)}} commented that:<br>
+  
+            {{comment.comment}}
+          </p>
+        </div>
+      {% endfor %}
+        {% else %}
+        <p> There are no comments available on this blog </p>
+        {% endif %}
+         {%endfor%} 
+    {%else%}
+    <p class="text-center">Be the first to add a Blog </p>
+    {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer class="registerUser" id="footer">
+	<p class="small text-center text-white">
+			Powered by © Copyright 2022
+			<i class="fa fa-heart" aria-hidden="true"> Cheeks Cloud</i> 
+	</p>
+</footer>
+
+{% endmacro %}

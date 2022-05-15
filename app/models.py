@@ -18,7 +18,7 @@ class User(UserMixin,db.Model):
   bio = db.Column(db.String(255))
   profile_pic_path = db.Column(db.String())
   pass_secure = db.Column(db.String(255))
-  blog = db.relationship('Post',backref = 'users',lazy="dynamic")
+  blog = db.relationship('Blog',backref = 'users',lazy="dynamic")
   comment = db.relationship('Comment',backref = 'users',lazy="dynamic")
  
 
@@ -41,9 +41,10 @@ class User(UserMixin,db.Model):
 class Blog(db.Model):
     __tablename__ = 'blogs'
     id = db.Column(db.Integer, primary_key=True)
+    update = db.Column(db.String(255))
     blog = db.Column(db.Text,nullable=False)
     author = db.Column(db.Integer,db.ForeignKey('users.id'))
-    comment = db.relationship('Comment', backref='posts',lazy='dynamic')
+    comment = db.relationship('Comment', backref='blogs',lazy='dynamic')
 
     def get_blogs():
         blogs = Blog.query.all()
@@ -61,7 +62,7 @@ class Comment(db.Model):
     __tablename__ = 'comment'
     id = db.Column(db.Integer,primary_key=True)
     comment = db.Column(db.Text,nullable=False)
-    blog = db.Column(db.Integer,db.ForeignKey('posts.id'))
+    blog = db.Column(db.Integer,db.ForeignKey('blogs.id'))
     author = db.Column(db.Integer,db.ForeignKey('users.id'))
    
    
@@ -69,6 +70,6 @@ class Comment(db.Model):
         author = User.query.filter_by(id=id).first()
         return author.username
 
-    def get_post(self):
+    def get_blog(self):
         blog = Blog.query.filter_by(id=self.id).first()
         return blog

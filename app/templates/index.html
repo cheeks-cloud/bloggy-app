@@ -10,5 +10,18 @@
     <div class="container">  
         {{macro.displayQuotes(quotes)}}
     </div>
+    <div class=" container ">
+      <div class="jumbotron">
+        <h3 class="display-4 text-center"> Write a Blog  </h3>
+        <p class="text-center">Click the button below to add Blogs.</p>
+        <hr class="my-4">
+        <div class="text-center">
+          <a href=" {{url_for('main.write_blog')}} "> <button class="btn btn-success" style="padding: 20px;"> click Me </button></a>
+        </div>
+      </div>
+    </div>
+  
+  
+    
 
 {% endblock %}

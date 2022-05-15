@@ -2,7 +2,9 @@
 {% import 'bootstrap/wtf.html' as wtf %}
  
 {% block content %} 
-{{title}}
+<div class="container text-center" style="color:green">
+	{{title}}
+</div>
 	<div class="container"> 
 		<div class="row">
 			<div class= "col-md-2"> 
@@ -13,18 +15,19 @@
 				</div>
 			  {% endfor %}  
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-6 text-center"style="padding-top:30px;margin-left:8%;"">
 					{{wtf.quick_form(login_form)}}
 			</div>
-			
-			<div clas="col-md-8"> 
-				<p> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
-			</div>
+			<div class="container text-center" >
+				<div class="col-md-9"> 
+					<p> Don't have an account? <a href="{{url_for('auth.register')}}"style="color:green;">Sign up here</a></p>
+				</div>
+	  	</div>
   	</div>
 	</div>
 	
-	<footer class="registerUser" id="footer">
-		<p class="small">
+	<footer style="padding-top:50px;">
+		<p class="small text-center"">
 				Powered by © Copyright 2022
 				<i class="fa fa-heart" aria-hidden="true"> Cheeks Cloud</i> 
 		</p>

@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from  app.request import get_quotes
 from ..models import Comment,User,Blog
-from .forms import CommentForm,UpdateProfile,BlogForm
+from .forms import CommentForm,UpdateProfile,BlogForm,UpdateBlog
 from flask_login import login_required,current_user
 from .. import db,photos
 
@@ -14,6 +14,24 @@ def index():
   
     return render_template('index.html',title=title,quotes = quoteFound)
 
+@main.route('/blogs/display')
+def display():
+    title = "Welcome to Blogging Application"
+ 
+    return render_template('display.html',title=title)
+
+@main.route('/blog/<blog_id>/update')
+@login_required
+def updatedblog(blog_id):
+    blog = Blog.query.filter_by(id = blog_id).first()
+    form = UpdateBlog
+    if form.validate_on_submit(form):
+        blog.updated = form.updated.data
+        db.session.add(blog)
+        db.session.commit()
+        return redirect(url_for('main.updatedblog',blog_id=blog.id))
+
+    return render_template('update.html',form=form)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -59,7 +77,6 @@ def update_pic(uname):
 @main.route('/comment/<comment_id>/add/comment', methods = ['GET','POST'])
 @login_required
 def newComment(comment_id):
-    print(comment_id)
     form = CommentForm() 
     if form.validate_on_submit():
         about = form.about.data 

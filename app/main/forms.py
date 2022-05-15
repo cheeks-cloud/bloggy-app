@@ -3,7 +3,7 @@ from wtforms import TextAreaField,SubmitField
 from wtforms.validators import InputRequired
 
 class BlogForm(FlaskForm):
-    about = TextAreaField('Blog', validators=[InputRequired()])
+    blog = TextAreaField('Blog', validators=[InputRequired()])
     author = TextAreaField('Blog author ', validators=[InputRequired()])
     submit = SubmitField('Submit')
 
@@ -15,3 +15,6 @@ class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [InputRequired()])
     submit = SubmitField('Submit')
 
+class UpdateBlog(FlaskForm):
+    update = TextAreaField('Tell us about you.',validators = [InputRequired()])
+    submit = SubmitField('Submit')
