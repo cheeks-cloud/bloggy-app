@@ -1,0 +1,16 @@
+{% macro displayQuotes(quotes) %}
+  <div class="container">
+    <div class="row">
+      {% for quote in quotes %}
+        <div class="col-sm-6 col-md-6">
+          <h3> {{quote.id}}. {{ quote.quote }}</h3>
+        <div>
+          <p> written by <i>{{quote.author}} </i></p> 
+        </div>
+        </div>
+      
+      {% endfor %}
+    </div>
+  </div>
+
+{% endmacro %}
