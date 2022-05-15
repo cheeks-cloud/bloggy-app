@@ -8,19 +8,19 @@ def configure_request(app):
   api_key = app.config['']
   base_url = app.config['']
 
-# def get_quotes():
-#   get_quotes_url = base_url .format(x,api_key)
+def get_quotes():
+  get_quotes_url = base_url .format(x,api_key)
 
-#   with urllib.request.urlopen(get_quotes_url)as url:
-#     get_quotes_data = url.read()
-#     get_quotes_reponse = json.loads(get_quotes_data) 
-#     quotes_results = None
+  with urllib.request.urlopen(get_quotes_url)as url:
+    get_quotes_data = url.read()
+    get_quotes_reponse = json.loads(get_quotes_data) 
+    quotes_results = None
 
-#     if get_quotes_reponse['results']:
-#       quotes_results_list = get_quotes_reponse['results']
-#       quotes_results  = process_results(quotes_results_list)
+    if get_quotes_reponse['results']:
+      quotes_results_list = get_quotes_reponse['results']
+      quotes_results  = process_results(quotes_results_list)
 
-#   return quotes_results
+  return quotes_results
 
 
 # def process_results(quote_list):
