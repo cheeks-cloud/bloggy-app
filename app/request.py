@@ -23,15 +23,15 @@ def get_quotes():
   return quotes_results
 
 
-# def process_results(quote_list):
-#   quotes_results = []
-#   for quote_item in quote_list:
-#     id =  quote_item.get('id')
-#     quote = quote_item.get('quote')
-#     author = quote_item.get('author')
+def process_results(quote_list):
+  quotes_results = []
+  for quote_item in quote_list:
+    id =  quote_item.get('id')
+    quote = quote_item.get('quote')
+    author = quote_item.get('author')
    
-#     if id:
-#       quote_object = Quote(id,quote,author)
-#       quotes_results.append(quote_object)
+    if id:
+      quote_object = Quote(id,quote,author)
+      quotes_results.append(quote_object)
 
-#   return quotes_results 
+  return quotes_results 
