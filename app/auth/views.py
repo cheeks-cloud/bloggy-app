@@ -43,3 +43,9 @@ def profile(uname):
      blogs = Blog.query.filter_by(author=user.id).all()
      return render_template('profile/profile.html',user = user,blogs=blogs)
 
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("main.index"))
