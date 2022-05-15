@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for,flash
 from . import auth
-from ..models import User,Post
+from ..models import Blog, User,
 from .. import db
 from .forms import RegistrationForm,LoginForm
 from flask_login import login_user,logout_user,login_required
@@ -34,4 +34,12 @@ def register():
     title = "New Account"
 
     return render_template('auth/register.html',form = form,title=title)
+
+
+@auth.route('/Profile/<uname>/profile')
+@login_required
+def profile(uname):
+     user = User.query.filter_by(username = uname).first()
+     blogs = Blog.query.filter_by(author=user.id).all()
+     return render_template('profile/profile.html',user = user,blogs=blogs)
 
