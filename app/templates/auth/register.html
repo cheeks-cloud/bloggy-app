@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+ 
+{% block content %} 
+{{title}}
+		<div class="col-md-6">
+			{{wtf.quick_form(form)}}
+		</div>
+		<p>Have an account? 
+			<a href="{{url_for('auth.login')}}"> Login? </a>
+		</p>
+		
+		
+		<footer class="registerUser" id="footer">
+			<p class="small">
+					Powered by © Copyright 2022
+					<i class="fa fa-heart" aria-hidden="true"> Cheeks Cloud</i> 
+			</p>
+		</footer>
+	
+
+{% endblock%}

@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+ 
+{% block content %} 
+
+<div class="container">
+  {{wtf.quick_form(form)}}
+</div>
+
+<a class="btn btn-primary" style="padding: 20px;margin-top:20px;" href="{{url_for('main.index')}}" role="button">BACK HOME</a> 
+
+{% endblock %}
+

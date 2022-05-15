@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtform%}
+
+{% block content %}
+<div class="container">
+   <h3>
+      Tell the writer what you think?
+   </h3>
+   
+   <div class="form w-75 h-50">
+    {{wtform.quick_form(comment_form)}}
+   </div>
+</div>
+  
+{% endblock %}
+
