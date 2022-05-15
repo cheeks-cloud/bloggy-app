@@ -38,22 +38,22 @@ class User(UserMixin,db.Model):
   def load_user(user_id):
     return User.query.get(int(user_id)) 
 
-class Blog(db.Model):
-    __tablename__ = 'blogs'
-    id = db.Column(db.Integer, primary_key=True)
-    blog = db.Column(db.Text,nullable=False)
-    author = db.Column(db.Integer,db.ForeignKey('users.id'))
-    comment = db.relationship('Comment', backref='posts',lazy='dynamic')
+# class Blog(db.Model):
+#     __tablename__ = 'blogs'
+#     id = db.Column(db.Integer, primary_key=True)
+#     blog = db.Column(db.Text,nullable=False)
+#     author = db.Column(db.Integer,db.ForeignKey('users.id'))
+#     comment = db.relationship('Comment', backref='posts',lazy='dynamic')
 
-    def get_blogs():
-        blogs = Blog.query.all()
-        return blogs
+#     def get_blogs():
+#         blogs = Blog.query.all()
+#         return blogs
 
-    def get_author(self,id):
-        author = User.query.filter_by(id=id).first()
-        return author.username
+#     def get_author(self,id):
+#         author = User.query.filter_by(id=id).first()
+#         return author.username
 
-    def get_comments(self,blog):
-        all_comments = Comment.query.filter_by(blog=blog).all()
-        return all_comments
+#     def get_comments(self,blog):
+#         all_comments = Comment.query.filter_by(blog=blog).all()
+#         return all_comments
 
