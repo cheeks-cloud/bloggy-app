@@ -1,0 +1,4 @@
+Hello {{user.username}}
+Welcome to Posts and Pitches
+We have just seen you have signed up for our application and want to welcome you to the family.
+Feel free to post away,and leave a comment for posts you like.
