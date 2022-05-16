@@ -33,6 +33,24 @@ def updatedblog(blog_id):
 
     return render_template('update.html',form=form)
 
+
+@main.route('/<blog_id>/',methods=['GET','DELETE'])
+@login_required
+def deleteBlog(blog_id):
+    blogDeleted = Blog.query.filter_by(id=blog_id).first()
+
+    if blogDeleted:
+        db.session.delete(blogDeleted)
+        db.session.commit()
+
+        return redirect(url_for('main.index'))
+
+    else:
+        pass
+    return redirect(url_for('main.display'))
+
+
+
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
@@ -80,7 +98,7 @@ def newComment(comment_id):
     form = CommentForm() 
     if form.validate_on_submit():
         about = form.about.data 
-        new_comment = Comment(about=about,writer=current_user.id,post=comment_id)
+        new_comment = Comment(about=about,author=current_user.id,blog=comment_id)
         db.session.add(new_comment)
         db.session.commit()
        
@@ -88,4 +106,12 @@ def newComment(comment_id):
   
     return render_template('auth/comments.html',comment_form=form)
 
- 
+@main.route('/<blog_id>/<comment_id>/',methods=['GET','DELETE'])
+@login_required
+def deleteComment(comment_id):
+    commentToDelete = Comment.query.filter_by(comment_id=comment_id).first()
+
+    if commentToDelete:
+        db.session.delete(commentToDelete)
+        db.session.commit()
+        return redirect(url_for('main.index'))

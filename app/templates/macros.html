@@ -23,7 +23,7 @@
       <h4 class="text-white"> {{blog.blog}}  </h4>
       <div class="card-body">
         <p class="card-text text-white"> Written by: <i> {{blog.get_author(blog.author)}}  </i></p>
-        <a href=" {{url_for('main.newComment',comment_id=post.id)}} ">Click to add a comment</a>
+        <a href=" {{url_for('main.newComment',comment_id=blog.id)}} ">Click to add a comment</a>
        
         {% if blog.get_comments(blog.id) %}
         <h2 class="text-white"> Here are all comments </h2>
@@ -34,6 +34,7 @@
   
             {{comment.comment}}
           </p>
+          <a href=" {{url_for('main.deleteComment',comment_id=comment.id)}} ">Click to delete comment</a>
         </div>
       {% endfor %}
         {% else %}

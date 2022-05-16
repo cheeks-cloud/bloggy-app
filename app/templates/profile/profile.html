@@ -49,6 +49,8 @@
           </div>
         </div>
         <a href="{{url_for('main.updatedblog',blog_id=blog.id)}}"> update Blog </a>
+      
+      <a  class="btn btn-outline-success" href="{{url_for('main.deleteBlog',blog_id=blog.id)}}">delete Blog </a>
         {% endfor %} 
        </div>
       {% endif%}
