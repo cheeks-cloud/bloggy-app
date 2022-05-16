@@ -48,9 +48,9 @@
             <p class="card-text">{{blog.current_user}}</p>  
           </div>
         </div>
-        <a href="{{url_for('main.updatedblog',blog_id=blog.id)}}"> update Blog </a>
-      
-      <a  class="btn btn-outline-success" href="{{url_for('main.deleteBlog',blog_id=blog.id)}}">delete Blog </a>
+        <a class="btn btn-success" style="margin-top:10px;"href="{{url_for('main.updatedblog',blog_id=blog.id)}}"> Update Blog </a> 
+
+      <a  class="btn btn-danger" style="margin-top:10px;" href="{{url_for('main.deleteBlog',blog_id = blog.id)}}">{{blog.deleteBlog}} Delete Blog </a>
         {% endfor %} 
        </div>
       {% endif%}
@@ -67,6 +67,6 @@
         </div>
        
         <div class="text-center">
-         <a class="btn btn-outline-success" style="margin-top:10px;" href="{{url_for('main.index')}}" role="button">BACK HOME</a>
+         <a class="btn btn-success" style="margin-top:10px;" href="{{url_for('main.index')}}" role="button">BACK HOME</a>
         </div> 
 {% endblock %}

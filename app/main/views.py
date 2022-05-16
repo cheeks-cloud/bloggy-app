@@ -17,15 +17,16 @@ def index():
 @main.route('/blogs/display')
 def display():
     title = "Welcome to Blogging Application"
- 
-    return render_template('display.html',title=title)
+    blogs = Blog.query.all()
+    
+    return render_template('display.html',title=title,blogs=blogs)
 
-@main.route('/blog/<blog_id>/update')
+@main.route('/blog/<blog_id>/update',methods= ['GET','POST'])
 @login_required
 def updatedblog(blog_id):
     blog = Blog.query.filter_by(id = blog_id).first()
-    form = UpdateBlog
-    if form.validate_on_submit(form):
+    form = UpdateBlog()
+    if form.validate_on_submit():
         blog.updated = form.updated.data
         db.session.add(blog)
         db.session.commit()
@@ -38,17 +39,13 @@ def updatedblog(blog_id):
 @login_required
 def deleteBlog(blog_id):
     blogDeleted = Blog.query.filter_by(id=blog_id).first()
-
     if blogDeleted:
         db.session.delete(blogDeleted)
         db.session.commit()
-
-        return redirect(url_for('main.index'))
-
+        return redirect(url_for('main.display'))
     else:
         pass
     return redirect(url_for('main.display'))
-
 
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
@@ -67,17 +64,18 @@ def update_profile(uname):
 
     return render_template('profile/update.html',form =form)
 
-@main.route('/post',methods=['GET','POST'])
+@main.route('/blog/',methods=['GET','POST'])
 @login_required
 def write_blog():
     form = BlogForm()
     if form.validate_on_submit():
-        blog = Blog(blog= form.blog.data,author = current_user.id)
-    
-        db.session.add(blog)
-        db.session.commit()
-        return redirect(url_for('auth.profile',uname=current_user.username))
+        blog = form.blog.data,
+        user_id = current_user
+        new_blog = Blog(blog=blog,user_id = current_user._get_current_object().id)
 
+        new_blog.save()
+
+        return redirect(url_for('auth.profile',uname=current_user.username))
 
     return render_template('blogs.html',form = form)
 
@@ -97,21 +95,24 @@ def update_pic(uname):
 def newComment(comment_id):
     form = CommentForm() 
     if form.validate_on_submit():
-        about = form.about.data 
-        new_comment = Comment(about=about,author=current_user.id,blog=comment_id)
+        comment = form.about.data 
+        new_comment = Comment(comment=comment,author=current_user.id,blog=comment_id)
         db.session.add(new_comment)
         db.session.commit()
        
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.display'))
   
     return render_template('auth/comments.html',comment_form=form)
 
-@main.route('/<blog_id>/<comment_id>/',methods=['GET','DELETE'])
+@main.route('/<comment_id>/',methods=['GET','DELETE'])
 @login_required
 def deleteComment(comment_id):
-    commentToDelete = Comment.query.filter_by(comment_id=comment_id).first()
+    commentToDelete = Comment.query.filter_by(id=comment_id).first()
 
     if commentToDelete:
         db.session.delete(commentToDelete)
         db.session.commit()
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.display'))
+
+    else:
+        pass
